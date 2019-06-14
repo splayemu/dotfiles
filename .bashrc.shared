@@ -1,0 +1,5 @@
+
+# Use dgit to interact with our remote home repo stored in .dotfiles
+alias dgit='git --git-dir ~/.dotfiles/.git --work-tree=$HOME'
+
+echo "Sourced .bashrc.shared"
