@@ -26,8 +26,6 @@ for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
 done
 unset file
 
-[[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
-
 export JAVA_HOME=$(/usr/libexec/java_home)
 
 source /usr/local/opt/asdf/asdf.sh
@@ -44,4 +42,4 @@ complete -C ./autocomplete.rb -o default thor
 set -o vi
 set show-mode-in-prompt on
 
-echo "sourced"
+echo "Sourced .bashrc.macos"
