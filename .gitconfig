@@ -1,0 +1,9 @@
+[user]
+name = Spencer Apple
+email = spencer@adstage.io
+
+[merge]
+conflictstyle = diff3
+
+[alias]
+	bp = !/Users/spencerapple/bin/git-branchpick/branchpick
