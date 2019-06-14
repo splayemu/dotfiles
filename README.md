@@ -10,7 +10,12 @@ https://www.electricmonk.nl/log/2015/06/22/keep-your-home-dir-in-git-with-a-deta
 
 This repo ignores everything by default.
 
-Add a file like so:
+### Sync dotfiles
+```
+dgit reset --hard
+```
+
+### Add a file:
 ```
 git add -f .dotfile.supercool
 ```

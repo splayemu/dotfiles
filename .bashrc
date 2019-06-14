@@ -1,5 +1,4 @@
 OS="$(uname -a)"
-echo "$OS"
 
 source .bashrc.shared
 
