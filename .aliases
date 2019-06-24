@@ -27,3 +27,6 @@ alias gc="git checkout"
 alias gp="git pull"
 
 alias grep="grep --color=auto"
+
+# other
+alias be="bundle exec"
