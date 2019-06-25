@@ -17,6 +17,7 @@ This repo ignores everything by default.
 ### Sync dotfiles
 ```
 dgit reset --hard
+./copy-dotfiles.sh
 ```
 
 ### Add a file:
