@@ -24,3 +24,18 @@ dgit reset --hard
 ```
 git add -f .dotfile.supercool
 ```
+
+## Troubleshooting
+### Spacemacs
+If you are having trouble with spacemacs, just remove your `~/.emacs.d` directory and reinstall Spacemacs:
+1. Update emacs
+```
+sudo apt-get update emacs
+```
+2. Download spacemacs
+```
+git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+```
+3. Update everything through the in editor button
+4. Update your packages through the in editor button
+
