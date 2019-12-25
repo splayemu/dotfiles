@@ -42,7 +42,11 @@ values."
      ;; ----------------------------------------------------------------
      ;;helm
      ivy
-     clojure
+
+     ;;auto-completion
+     evil-cleverparens
+     ;;(cider :variables )
+     (clojure :variables clojure-indent-style 'always-indent)
      ;; auto-completion
      ;; better-defaults
      emacs-lisp
@@ -266,7 +270,7 @@ values."
    dotspacemacs-folding-method 'evil
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
-   dotspacemacs-smartparens-strict-mode nil
+   dotspacemacs-smartparens-strict-mode t
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
    ;; over any automatically added closing parenthesis, bracket, quote, etc…
    ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
@@ -291,7 +295,7 @@ values."
    ;; `trailing' to delete only the whitespace at end of lines, `changed'to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup nil
+   dotspacemacs-whitespace-cleanup 'trailing
    )
   ;; doesn't work
   ;;(package-initialize)
@@ -311,7 +315,7 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  
+
   )
 
 (defun dotspacemacs/user-config ()
@@ -325,9 +329,15 @@ you should place your code here."
   ;;(require 'simpleclip)
   ;;(simpleclip-mode 1)
   (xclip-mode 1)
+  (setq cider-font-lock-reader-conditionals nil)
 
-  
-  
+  (add-hook 'clojure-mode-hook #'evil-cleverparens-mode)
+  (spacemacs/toggle-evil-cleverparens-on)
+  ;; perhaps will always open svg files in xml mode
+  ;; (add-to-list `auto-mode-alist '("\\.svg\\'" . xml-mode))
+
+
+
 
   )
 
@@ -340,7 +350,7 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (helm-themes helm-pydoc helm helm-core org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download htmlize gnuplot winum iedit anzu evil undo-tree clj-refactor inflections edn powerline smartparens paradox markdown-mode skewer-mode simple-httpd json-snatcher json-reformat js2-mode hydra dash-functional parent-mode haml-mode flx highlight goto-chg popup swiper ivy multiple-cursors paredit yasnippet lv eval-sexp-fu cider sesman bind-map bind-key f dash s avy package-build pyenv-mode spinner orgit org magit-gitflow magit-popup hl-todo git-timemachine evil-magit magit transient git-commit with-editor counsel-projectile projectile peg queue pkg-info parseedn clojure-mode parseclj a epl auto-compile packed anaconda-mode pythonic yapfify xclip ws-butler window-numbering which-key wgrep web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tagedit spacemacs-theme spaceline smex smeargle slim-mode scss-mode sass-mode restart-emacs request rainbow-delimiters quelpa pyvenv pytest py-isort pug-mode popwin pip-requirements persp-mode pcre2el org-plus-contrib org-bullets open-junk-file neotree move-text mmm-mode markdown-toc macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode json-mode js2-refactor js-doc ivy-hydra info+ indent-guide ido-vertical-mode hy-mode hungry-delete highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-make google-translate golden-ratio gitignore-mode gitconfig-mode gitattributes-mode git-messenger git-link gh-md flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu emmet-mode elisp-slime-nav dumb-jump diminish define-word cython-mode counsel column-enforce-mode coffee-mode clean-aindent-mode cider-eval-sexp-fu bracketed-paste auto-highlight-symbol async aggressive-indent adaptive-wrap ace-window ace-link))))
+    (evil-cleverparens company clojure-snippets auto-yasnippet ac-ispell auto-complete helm-themes helm-pydoc helm helm-core org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download htmlize gnuplot winum iedit anzu evil undo-tree clj-refactor inflections edn powerline smartparens paradox markdown-mode skewer-mode simple-httpd json-snatcher json-reformat js2-mode hydra dash-functional parent-mode haml-mode flx highlight goto-chg popup swiper ivy multiple-cursors paredit yasnippet lv eval-sexp-fu cider sesman bind-map bind-key f dash s avy package-build pyenv-mode spinner orgit org magit-gitflow magit-popup hl-todo git-timemachine evil-magit magit transient git-commit with-editor counsel-projectile projectile peg queue pkg-info parseedn clojure-mode parseclj a epl auto-compile packed anaconda-mode pythonic yapfify xclip ws-butler window-numbering which-key wgrep web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tagedit spacemacs-theme spaceline smex smeargle slim-mode scss-mode sass-mode restart-emacs request rainbow-delimiters quelpa pyvenv pytest py-isort pug-mode popwin pip-requirements persp-mode pcre2el org-plus-contrib org-bullets open-junk-file neotree move-text mmm-mode markdown-toc macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode json-mode js2-refactor js-doc ivy-hydra info+ indent-guide ido-vertical-mode hy-mode hungry-delete highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-make google-translate golden-ratio gitignore-mode gitconfig-mode gitattributes-mode git-messenger git-link gh-md flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu emmet-mode elisp-slime-nav dumb-jump diminish define-word cython-mode counsel column-enforce-mode coffee-mode clean-aindent-mode cider-eval-sexp-fu bracketed-paste auto-highlight-symbol async aggressive-indent adaptive-wrap ace-window ace-link))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
