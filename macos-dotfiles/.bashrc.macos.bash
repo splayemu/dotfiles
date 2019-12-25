@@ -39,4 +39,4 @@ complete -C ./autocomplete.rb -o default thor
 set -o vi
 set show-mode-in-prompt on
 
-echo "Sourced .bashrc.macos"
+echo "Sourced .bashrc.macos.bash"

@@ -116,4 +116,4 @@ xcape -e 'Caps_Lock=Escape'
 alias "pbcopy=xclip -sel clip -i"
 alias "pbpaste=xclip -o"
 
-echo "Sourced .bashrc.debian"
+echo "Sourced .bashrc.debian.bash"

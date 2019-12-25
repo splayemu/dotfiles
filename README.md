@@ -20,6 +20,11 @@ dgit reset --hard
 ./copy-dotfiles.sh
 ```
 
+or once bash has all the aliases
+```
+dotfiles
+```
+
 ### Add a file:
 ```
 git add -f .dotfile.supercool
@@ -38,4 +43,3 @@ git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 ```
 3. Update everything through the in editor button
 4. Update your packages through the in editor button
-
