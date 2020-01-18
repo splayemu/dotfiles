@@ -116,4 +116,7 @@ xcape -e 'Caps_Lock=Escape'
 alias "pbcopy=xclip -sel clip -i"
 alias "pbpaste=xclip -o"
 
+# dokku
+alias "dokku=ssh -t dokku@159.65.67.95"
+
 echo "Sourced .bashrc.debian.bash"
