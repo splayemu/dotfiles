@@ -26,3 +26,7 @@ Open `iterm-theme/solarized_light.itermcolors` in iterm2
 ```
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true; killall Finder
 ```
+
+10. Install mission control commands
+
+![mission_control_config.png](mission_control_config.png)
