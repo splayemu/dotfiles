@@ -23,18 +23,10 @@ for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
 done
 unset file
 
-export JAVA_HOME=$(/usr/libexec/java_home)
-
-source /usr/local/opt/asdf/asdf.sh
-
-export CHANGELOG_GITHUB_TOKEN="2d06b6c3770261c2232baf6852e4a9abeb6c25d6"
-
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
 fi
 source ~/.git-completion.bash
-
-complete -C ./autocomplete.rb -o default thor
 
 set -o vi
 set show-mode-in-prompt on
