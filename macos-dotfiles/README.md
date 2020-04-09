@@ -30,3 +30,7 @@ defaults write com.apple.finder _FXShowPosixPathInTitle -bool true; killall Find
 10. Install mission control commands
 
 ![mission_control_config.png](mission_control_config.png)
+
+11. Update bash
+
+https://itnext.io/upgrading-bash-on-macos-7138bd1066ba
