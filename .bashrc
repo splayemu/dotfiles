@@ -8,3 +8,9 @@ if echo "$OS" | grep -q "Linux"; then
 else
     source ~/.bashrc.macos.bash
 fi
+
+if  [ -f ~/.bashrc.company.bash ]; then
+    source ~/.bashrc.company.bash
+else
+    echo "No .bashrc.company.bash config"
+fi
