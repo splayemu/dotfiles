@@ -48,6 +48,13 @@ or the current buffer directory."
   (package-install 'use-package))
 (require 'use-package)
 
+;; refresh keyring
+;; if signature is failing when downloading a package, you can silence the check and then turn it on again
+(setq package-check-signature nil)
+(use-package gnu-elpa-keyring-update
+  :ensure t)
+(setq package-check-signature "allow-unsigned")
+
 ;; VIM modal editing
 (use-package evil
   :ensure t
@@ -55,6 +62,13 @@ or the current buffer directory."
   (evil-mode 1))
 
 (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
+
+;; Adds a nice undo mode
+(use-package undo-tree
+  :ensure t)
+(global-undo-tree-mode)
+;; need to set this or else evil mode doesn't know how to undo!
+(evil-set-undo-system 'undo-tree)
 
 ;; Check out the themes here:
 ;; https://github.com/hlissner/emacs-doom-themes/tree/screenshots
@@ -119,6 +133,18 @@ or the current buffer directory."
   :config
   (which-key-mode))
 
+;; Git config
+(use-package git-link
+  :ensure t
+  :init
+  (progn
+    ;; default is to open the generated link
+    (setq git-link-open-in-browser t)))
+
+;; Remove trailing whitespace
+(use-package ws-butler
+  :ensure t)
+
 ;; Custom keybinding
 (use-package general
   :ensure t
@@ -146,19 +172,51 @@ or the current buffer directory."
   "fd"  '(cust-find-user-init-file :which-key "open init.el")
   ;; projectile
   "pp"  '(projectile-switch-project :which-key "find project") 
-  "pf"  '(projectile-find-file :which-key "find file")
-  ;; TODO: get this working
-  "pb"  '(projectile-find-buffer :which-key "find buffer")
+  "pf"  '(projectile-find-file :which-key "fuzzy search find file")
+  "ps"  '(counsel-ag :which-key "fuzzy search in project")
+  "pb"  '(projectile-switch-to-buffer :which-key "find buffer")
   "pk"  '(projectile-kill-buffers :which-key "kill buffers")
   "pt"  '(cust-neotree-project-dir-toggle :which-key "show tree")
   ;; search
   "ss"  '(swiper-isearch :which-key "search")
-  ;; TODO: add search only in project
-  ;; clojure (TODO: to replicate spacemacs bindings, need to figure out the leader prefix)
+  ;; clojure
   "ee"  '(cider-eval-last-sexp :which-key "eval expr")
   "eb"  '(cider-load-buffer :which-key "eval buffer")
-  ;; TODO: switch to repl
+  "ef"  '(cider-eval-defun-at-point :which-key "eval form")
+  "c;"  '(cider-jack-in :which-key "create cider repl")
+  "cc"  '(cider-connect :which-key "connect to repl")
+  "cs"  '(cider-switch-to-repl-buffer :which-key "switch to repl")
+  "ch"  '(cider-doc :which-key "get doc of clojure var")
+  "cg"  '(cider-find-var :which-key "go to definition of clojure var")
+  ;; lisp state - consider adding: https://github.com/syl20bnr/evil-lisp-state
+  "ks"  '(paredit-forward-slurp-sexp :which-key "slurp next")
+  "kb"  '(paredit-forward-barf-sexp :which-key "barf next")
+  "kw"  '(paredit-wrap-sexp :which-key "wrap form")
+  ;; git link
+  "gl"  '(git-link :which-key "open code in github")
 ))
+
+;; TODO: how to create new file from neotree?
+;; TODO: also turn off evil mode in neotree
+
+;; TODO: add line numbers
+;; TODO: auto remove whitespace on save
+
+(defun set-exec-path-from-shell-PATH ()
+  "Set up Emacs' `exec-path' and PATH environment variable to match
+that used by the user's shell.
+
+This is particularly useful under Mac OS X and macOS, where GUI
+apps are not started from a shell."
+  (interactive)
+  (let ((path-from-shell (replace-regexp-in-string
+			  "[ \t\n]*$" "" (shell-command-to-string
+					  "$SHELL --login -c 'echo $PATH'"
+						    ))))
+    (setenv "PATH" path-from-shell)
+    (setq exec-path (split-string path-from-shell path-separator))))
+
+(set-exec-path-from-shell-PATH)
 
 (use-package smartparens
   :ensure t
@@ -168,17 +226,33 @@ or the current buffer directory."
 (use-package evil-cleverparens
   :ensure t)
 
+;; terraform specific configuration
+(use-package terraform-mode
+  :ensure t)
+
 ;; Clojure specific configuration
 (use-package clojure-mode
   :ensure t)
+
+;; Remove clojure specific matched quotes
+;; See: https://smartparens.readthedocs.io/en/latest/pair-management.html#local-pair-definitions
+(sp-with-modes 'clojure-mode
+  (sp-local-pair "'" nil :actions nil)
+  (sp-local-pair "`" nil :actions nil)
+  )
 
 (use-package cider
   :ensure t
   :init
   (setq cider-font-lock-reader-conditionals nil))
 
+;; Adds options to all cider-jack-in commands
+(setq cider-clojure-cli-global-options "-A:dev-defaults:dev -Sforce")
+(setq cider-clojure-cli-command "~/.direnv-clojure.sh")
+
 (add-hook 'clojure-mode-hook #'smartparens-mode)
 (add-hook 'clojure-mode-hook #'evil-cleverparens-mode)
+
 
 ;; better default ui
 (scroll-bar-mode -1)
@@ -191,8 +265,19 @@ or the current buffer directory."
 ;; - how do I get autocomplete in the minibuffer?
 ;;   - when I am searching for commands
 ;;   - when I find files and such?
-;; - how do I reload the init file without closing emacs?
 ;;   - you can evaluate a function with `C-x C-e`
+;; - Can I replicate the search for things and edit accross multiple files?
+
+;; How to use:
+
+;; How do I reload the init file without closing emacs?
+;; `(eval-buffer)`
+
+;;   How do I fuzzy search for text in a file?
+;;   How do I fuzzay search for filenames?
+;;   How do I look up keybindings?
+;; C-h k keybinding
+;;   How do I add a new mode?
 
 
 ;; Auto Generated
@@ -203,8 +288,7 @@ or the current buffer directory."
  ;; If there is more than one, they won't work right.
  '(line-number-mode nil)
  '(package-selected-packages
-   (quote
-    (evil-cleverparens smartparens cider neotree neo-tree counsel clojure-mode swiper-helm evil use-package))))
+   '(ws-butler git-link terraform-mode gnu-elpa-keyring-update undo-tree evil-cleverparens smartparens cider neotree neo-tree counsel clojure-mode swiper-helm evil use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
