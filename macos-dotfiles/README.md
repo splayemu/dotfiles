@@ -11,7 +11,12 @@ mv ~/.dotfiles/macos-dotfiles/karabiner.json ~/.config/karabiner/
 ```
 
 5. Create ssh-keys: `ssh-keygen -m PEM -t rsa`
-6. Install emacs: https://emacsformacosx.com/
+6. Install emacs 28
+```
+brew install emacs-plus@28
+```
+Old way: https://emacsformacosx.com/
+
 7. Install tmux
 See https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard/
 
@@ -34,3 +39,8 @@ defaults write com.apple.finder _FXShowPosixPathInTitle -bool true; killall Find
 11. Update bash
 
 https://itnext.io/upgrading-bash-on-macos-7138bd1066ba
+
+12. Install fzf
+```
+brew install fzf
+```

@@ -19,4 +19,7 @@ export EDITOR="$VISUAL"
 # type `z dir-name` to jump to the directory name with autocomplete
 . ~/z/z.sh
 
+# install fzf which adds fuzzy autocompletion
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 echo "Sourced .bashrc.shared.bash"
