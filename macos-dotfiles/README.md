@@ -55,3 +55,11 @@ chsh -s $(which bash)
 ```
 brew install fzf
 ```
+
+
+## Emacs Shit
+Followed this [client server setup](https://www.hhyu.org/posts/emacs_clientserver/).
+
+1. Created the scripts `bin/emacsserver` and `bin/ec`
+2. `emacsserver` finds the currently running server
+3. `ec` tries to connect to the server or starts a new server

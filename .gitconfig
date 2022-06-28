@@ -1,9 +1,11 @@
 [user]
 name = Spencer Apple
-email = spencer@parkside.app
+email = spencer.apple@nubank.com.br
 
 [merge]
 conflictstyle = diff3
 
 [alias]
 	bp = !/Users/spencerapple/bin/git-branchpick/branchpick
+[core]
+	excludesfile = /Users/spencer.apple/.gitignore_global
