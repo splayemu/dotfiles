@@ -25,6 +25,11 @@ See https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard/
 brew install reattach-to-user-namespace tmux
 ```
 
+8. Install fzf
+```
+brew install fzf
+```
+
 8. Install 'Solarized Light' theme for iterm2
 Open `iterm-theme/solarized_light.itermcolors` in iterm2. 
 ![iterm2_color_preferences](https://user-images.githubusercontent.com/1490056/168616987-d5a7fd88-5f0e-43e3-9164-3eba64e4aeb4.png)
@@ -44,18 +49,23 @@ https://itnext.io/upgrading-bash-on-macos-7138bd1066ba
 
 12. Set bash as default shell
 
+a. Find bash:
+```
+$ which bash
+/opt/homebrew/bin/bash
+```
+
+b. Add bash to `/etc/shells`
 ```
 sudo su -
-echo "$(which bash)" >> /etc/shells
+echo /opt/homebrew/bin/bash >> /etc/shells
 exit
-chsh -s $(which bash)
 ```
 
-12. Install fzf
+c. Update the shell for the user
 ```
-brew install fzf
+chsh -s /opt/homebrew/bin/bash
 ```
-
 
 ## Emacs Shit
 Followed this [client server setup](https://www.hhyu.org/posts/emacs_clientserver/).
