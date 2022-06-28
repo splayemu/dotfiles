@@ -16,11 +16,11 @@ This repo ignores everything by default.
 
 ### Sync dotfiles
 ```
-dgit reset --hard
-./copy-dotfiles.sh
+alias dgit='git --git-dir ~/.dotfiles/.git --work-tree=$HOME'
+alias dotfiles="dgit reset --hard; ./copy-dotfiles.sh"
 ```
 
-or once bash has all the aliases
+Now that bash has all the aliases
 ```
 dotfiles
 ```
@@ -29,17 +29,3 @@ dotfiles
 ```
 git add -f .dotfile.supercool
 ```
-
-## Troubleshooting
-### Spacemacs
-If you are having trouble with spacemacs, just remove your `~/.emacs.d` directory and reinstall Spacemacs:
-1. Update emacs
-```
-sudo apt-get update emacs
-```
-2. Download spacemacs
-```
-git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
-```
-3. Update everything through the in editor button
-4. Update your packages through the in editor button
