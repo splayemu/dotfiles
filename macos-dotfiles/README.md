@@ -15,6 +15,7 @@ mv ~/.dotfiles/macos-dotfiles/karabiner.json ~/.config/karabiner/
 ```
 brew tap d12frosted/emacs-plus
 brew install emacs-plus@28
+ln -s /opt/homebrew/Cellar/emacs-plus@28/28.1/Emacs.app /Applications/Emacs.app
 ```
 Old way: https://emacsformacosx.com/
 
