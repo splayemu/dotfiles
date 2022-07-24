@@ -15,6 +15,17 @@ mv ~/.dotfiles/macos-dotfiles/karabiner.json ~/.config/karabiner/
 ```
 brew tap d12frosted/emacs-plus
 brew install emacs-plus@28
+```
+Find emacs install location (depends on M1/intel/version of homebrew). 
+First look for where emacs is installed. 
+Then check where the symlink points to which is where emacs is actually installed.
+```
+which emacs
+ls -ltr ls -ltr /usr/local/bin/
+```
+
+Add symlink for emacs
+```
 ln -s /opt/homebrew/Cellar/emacs-plus@28/28.1/Emacs.app /Applications/Emacs.app
 ```
 Old way: https://emacsformacosx.com/
